@@ -1,3 +1,3 @@
 # LabEddit
  
-##Aplicação com funcionalidades semelhantes ao Reddit
+## Aplicação com funcionalidades semelhantes ao Reddit
