@@ -8,8 +8,8 @@ e o npm como gerenciador de pacotes do NodeJS .
 Sobre a divisão dos arquivos, há quatros setores. Os `components` são 
 os componentes em si do meu projeto (Header, Router, PageLogin, PageSignup, PageFeed, PagePost, Footer). 
 Já o segundo setor são os `contexts` que por sua vez são os contextos que são utilizados por diversos componentes sendo eles: CommentsContext,
-PostDetailContext, RequestDetailPostContext, RequestVoteCommentContext. O terceiro setor é o hooks que possue apenas um Custom Hook para contro
-lar os inputs do projeto. E o último setor mas não menos importante é o de reducers que é utilizado para guardar o valor da requisição que pega todos os 
+PostDetailContext, RequestDetailPostContext, RequestVoteCommentContext. O terceiro setor é o `hooks` que possue apenas um Custom Hook para contro
+lar os inputs do projeto. E o último setor mas não menos importante é o de `reducers` que é utilizado para guardar o valor da requisição que pega todos os 
 comentários de um post em específico sendo representado pelo PostReducers.
 
 ## Sobre
