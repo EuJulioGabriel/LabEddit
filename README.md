@@ -33,6 +33,10 @@ Há integrações com uma API externas nesse caso.
 
 <a href="http://capable-talk.surge.sh/">LabEddit</a>
 
+## Informações para login
+Email: visitante@visitante.com.br
+Senha: 123456
+
 ## Instruções para rodar
 Por ser um projeto com ReactJS, há a necessidade do NodeJS. Com ele em 
 sua máquina, basta abrir o terminal e navegar até o repositório clonado e 
