@@ -34,7 +34,7 @@ Há integrações com uma API externas nesse caso.
 <a href="http://capable-talk.surge.sh/">LabEddit</a>
 
 ## Informações para login
-Email: visitante@visitante.com.br
+Email: visitante@visitante.com.br <br>
 Senha: 123456
 
 ## Instruções para rodar
