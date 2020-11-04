@@ -3,15 +3,14 @@ import React, { useContext } from 'react'
 import PostDetailContent from '../../contexts/PostDetailContext'
 import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
-import {Botao, ContainerBotaoVotos} from "../PageLogin/StylePageLogin"
+import ButtonsVote from './ButtonsVote'
 
 function VoteComment(props) {
-
     const post = useContext(PostDetailContent)
     const requestVoteComment = useContext(RequestVoteCommentContext)
 
-    const onClickGostei = () => {
-        if (props.commentVoteDirection !==1) {
+    const onClickLiked = () => {
+        if (props.commentVoteDirection !== 1) {
             const body = {
                 direction: 1
             }
@@ -25,7 +24,7 @@ function VoteComment(props) {
         }    
     }
 
-    const onClickNaoGostei = () => {
+    const onClickUnliked = () => {
         if (props.commentVoteDirection !== -1) {
             const body = {
                 direction: -1
@@ -54,19 +53,12 @@ function VoteComment(props) {
     }
 
     return (
-        <ContainerBotaoVotos>
-            <Botao
-            onClick={onClickGostei}
-            cor={props.commentVoteDirection === 1 ? "green" : "white"}
-            corTexto={props.commentVoteDirection === 1 ? "white" : "black"}>↑
-            </Botao>
-            <p>{props.commentVotesCount}</p>
-            <Botao
-            onClick={onClickNaoGostei}
-            cor={props.commentVoteDirection === -1 ? "red" : "white"}
-            corTexto={props.commentVoteDirection === -1 ? "white" : "black"}>↓
-            </Botao>
-        </ContainerBotaoVotos>
+        <ButtonsVote 
+            onClickLiked= {onClickLiked}
+            onClickUnliked={onClickUnliked}
+            commentVoteDirection={props.commentVoteDirection}
+            commentVotesCount={props.commentVotesCount}
+        />
     )
 }
 

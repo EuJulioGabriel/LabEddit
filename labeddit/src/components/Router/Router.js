@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch, Route, BrowserRouter} from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 
 import PageLogin from '../PageLogin/PageLogin'
 import PageFeed from '../PageFeed/PageFeed'

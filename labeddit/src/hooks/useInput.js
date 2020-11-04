@@ -8,11 +8,11 @@ const useInput = (initialValues) => {
         setForm(newForm)
     }
 
-    const resetaEntrada = () => {
+    const resetInput = () => {
         setForm(initialValues)
     }
 
-    return {form, onChange, resetaEntrada}
+    return {form, onChange, resetInput}
 }
 
 export default useInput

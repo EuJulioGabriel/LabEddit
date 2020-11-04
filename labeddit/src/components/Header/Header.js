@@ -1,37 +1,12 @@
-import React, {useEffect} from "react"
-import styled from "styled-components"
-import {useHistory, useParams} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 
-const Cabecalho = styled.header`
-background-color: black;
-color: white;
-width: 100%;
-height: 10vh;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-`
-
-const BotaoLogout = styled.button`
-background-color: #ff4500;
-width: 5%;
-height: 5vh;
-border-style: none;
-border-radius: 2px;
-margin-right: 5vw;
-`
-
-const Logo = styled.h1`
-margin-left: 5vw;
-cursor: pointer;
-`
+import { ContainerHeader, LogoutButton, Logo } from './StyleHeaders'
 
 function Header() {
-
     const pathParams = useParams()
-
     const history = useHistory()
+    
     const token = window.localStorage.getItem("token")
 
     const logout = () => {
@@ -40,13 +15,13 @@ function Header() {
     }
 
     useEffect(() => {
-        renderizaNaTela()
+        renderInScreen()
     }, [pathParams])
 
-    const renderizaNaTela = () => {
+    const renderInScreen = () => {
         if (token !== null) {
             return (
-                <BotaoLogout onClick={logout}>Logout</BotaoLogout>
+                <LogoutButton onClick={logout}>Logout</LogoutButton>
             )
         }
     }
@@ -56,10 +31,10 @@ function Header() {
     }
 
     return(
-        <Cabecalho>
+        <ContainerHeader>
             <Logo onClick={goToFeed}>LabEddit</Logo>
-            {renderizaNaTela()}
-        </Cabecalho>
+            {renderInScreen()}
+        </ContainerHeader>
     )
 }
 

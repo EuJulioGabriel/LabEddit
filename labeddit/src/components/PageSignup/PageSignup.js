@@ -1,99 +1,67 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import axios from 'axios';
-import useInput from '../../hooks/useInput'
-import {ContainerPageSignup, ContainerSignUp, FormularioLogin,
-    ContainerInput,BotaoCadastrar, TextoLogin,
-BotaoVoltar} from '../PageLogin/StylePageLogin'
+import axios from 'axios'
 
-const url = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit"
+import { url } from '../../constants/constants'
+
+import useInput from '../../hooks/useInput'
+
+import { ContainerPageSignup, BackButton } from '../PageLogin/StylePageLogin'
+
+import FormPageSignup from './FormPageSignup'
   
 function PageSignup() {
-
-    const { form, onChange, resetaEntrada } = useInput({
-        nomeUsuario: "",
+    const { form, onChange, resetInput } = useInput({
+        userName: "",
         email: "",
-        senha: ""
-      });
+        password: ""
+    })
 
-    const history = useHistory();
+    const history = useHistory()
 
-    const handleInputChange = event => {
-        const { name, value} = event.target;
+    const handleInputChange = (event) => {
+        const { name, value} = event.target
     
-        onChange(name, value);
-    };
+        onChange(name, value)
+    }
 
     const handleSave = (event) => {
         event.preventDefault()
-        cadastrar()
+        signup()
     }
 
     const goToLogin = () => {
         history.push("/")
     }
 
-    const cadastrar=()=>{
+    const signup = () => {
         const body ={
             "email": form.email,
-            "password": form.senha,
-            "username": form.nomeUsuario
+            "password": form.password,
+            "username": form.userName
         }
         axios
         .post(`${url}/signup`, body)
-        .then(response=>{
-            history.push("/")
-            resetaEntrada()
+        .then((response) => {
             window.localStorage.setItem("token", response.data.token)
+            history.push("/")
+            resetInput()
         })
-        .catch(err=>{
-            console.log(err.message)
+        .catch((error) => {
+            alert(error.message)
         })
     }
 
     return (
         <ContainerPageSignup>
-            <BotaoVoltar onClick={goToLogin}>Voltar</BotaoVoltar>
-            <ContainerSignUp>
-                <FormularioLogin onSubmit={handleSave}>
-                    <ContainerInput>
-                        <TextoLogin>Nome de Usuário</TextoLogin>
-                        <input
-                            onChange={handleInputChange}
-                            name={"nomeUsuario"}
-                            value={form.nomeUsuario} 
-                            placeholder={"Nome de usuário"}
-                            type={"text"} 
-                            required
-                        />
-                    </ContainerInput>
-                    <ContainerInput>
-                        <TextoLogin>Email</TextoLogin>
-                        <input 
-                            onChange={handleInputChange} 
-                            name={"email"} value={form.email} 
-                            placeholder={"Email"} 
-                            type={"email"} 
-                            required
-                        />
-                    </ContainerInput>
-                    <ContainerInput>
-                        <TextoLogin>Senha</TextoLogin>
-                        <input 
-                            onChange={handleInputChange} 
-                            name={"senha"} value={form.senha} 
-                            placeholder={"Senha"} 
-                            type={"password"} 
-                            required
-                        />
-                    </ContainerInput>
-                    <ContainerInput>
-                        <BotaoCadastrar>Cadastrar</BotaoCadastrar>
-                    </ContainerInput>
-                </FormularioLogin>
-            </ContainerSignUp>
+            <BackButton onClick={goToLogin}>Voltar</BackButton>
+            <FormPageSignup 
+                handleInputChange={handleInputChange}
+                handleSave={handleSave}
+                form={form}
+            />
         </ContainerPageSignup>
     )
 }
 
-export default PageSignup;
+export default PageSignup

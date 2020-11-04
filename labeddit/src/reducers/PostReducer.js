@@ -5,7 +5,7 @@ export const initialState = {
 
 export const PostReducer = (state, action) => {
     switch(action.type) {
-        case "Renderizar":
+        case "Render":
             return { post: action.post, comment: action.post.comments }
         default: 
             return state 
