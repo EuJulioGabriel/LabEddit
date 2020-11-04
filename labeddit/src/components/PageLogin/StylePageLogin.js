@@ -18,7 +18,7 @@ justify-content: center;
 align-items: center;
 `
 
-export const ContainerGeralPageLogin = styled.div`
+export const ContainerGeneralPageLogin = styled.div`
 display: flex;
 `
 
@@ -27,7 +27,7 @@ width: 100%;
 height: 80vh;
 `
 
-export const ContainerAlturaMinimo = styled.div`
+export const ContainerMinimumHeight = styled.div`
 width: 100%;
 min-height: 80vh;
 `
@@ -40,7 +40,7 @@ align-items: center;
 justify-content: space-around;
 `
 
-export const FormularioLogin = styled.form`
+export const FormLogin = styled.form`
 width: 100%;
 height: 60vh;
 display: flex;
@@ -55,7 +55,7 @@ display: flex;
 flex-direction: column;
 `
 
-export const BotaoLogin = styled.button`
+export const LoginButton = styled.button`
 background-color: #ff4500;
 width: 5vw;
 height: 5vh;
@@ -65,12 +65,12 @@ font-size: 16px;
 font-weight: bold;
 `
 
-export const TextoLogin = styled.label`
+export const TextLogin = styled.label`
 font-size: 16px;
 font-weight: bold;
 `
 
-export const BotaoCadastrar = styled.button`
+export const SignupButton = styled.button`
 background-color: #ff4500;
 width: 10vw;
 height: 5vh;
@@ -80,11 +80,11 @@ font-size: 16px;
 font-weight: bold;
 `
 
-export const Botao = styled.button`
+export const Button = styled.button`
 font-size: 20px;
 font-weight: bold;
-background-color: ${props => props.cor};
-color: ${props => props.corTexto};
+background-color: ${props => props.color};
+color: ${props => props.textColor};
 cursor: pointer;
 border-style: none;
 outline: none;
@@ -118,43 +118,43 @@ justify-content: center;
 padding: 10px 0px;
 `
 
-export const TextoPostagem = styled.textarea`
+export const TextPost = styled.textarea`
 margin: 5px;
 height: 25vh;
 width: 42.5vw;
 `
 
-export const TituloPostagem = styled.input`
+export const TitlePost = styled.input`
 margin: 5px;
 width: 42.5vw;
 `
 
-export const ContainerPostagem = styled.div`
+export const ContainerPost = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: center;
 width: 100%;
 `
 
-export const FormularioPostagem = styled.form`
+export const FormPost = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
 width: 100%;
 `
 
-export const ContainerPublicacao = styled.div`
+export const ContainerPublication = styled.div`
 width: 100%;
 display: flex;
 justify-content: center;
 `
 
-export const ContainerBotaoVotos = styled.div`
+export const ContainerVotesButton = styled.div`
 width: 100%;
 display: flex;
 `
 
-export const BotaoCriaPost = styled.button`
+export const CreatePostButton = styled.button`
 width: 8vw;
 height: 3vw;
 background-color: #ff4500;
@@ -164,7 +164,7 @@ font-weight: bold;
 font-size: 16px;
 `
 
-export const BotaoVoltar = styled.button`
+export const BackButton = styled.button`
 width: 5vw;
 height: 3vw;
 background-color: white;

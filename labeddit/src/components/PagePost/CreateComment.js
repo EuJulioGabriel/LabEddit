@@ -2,17 +2,16 @@ import React, { useContext } from 'react'
 import axios from 'axios'
 
 import useInput from '../../hooks/useInput'
-import { baseUrl } from '../PageLogin/PageLogin'
+import { url, headers } from '../../constants/constants'
 
 import PostDetailContext from '../../contexts/PostDetailContext'
 import requestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
-import {ContainerPublicacao, ContainerPostagem, FormularioPostagem, TextoPostagem, BotaoCriaPost} from '../PageLogin/StylePageLogin'
+import FormCreateComment from './FormCreateComment'
 
-function CreateComment(props) {
-
-    const {form, onChange, resetaEntrada} = useInput({
-        comentario: ""
+function CreateComment() {
+    const {form, onChange, resetInput} = useInput({
+        comment: ""
     })
 
     const post = useContext(PostDetailContext)
@@ -25,24 +24,21 @@ function CreateComment(props) {
 
     const handleSave = (event) => {
         event.preventDefault()
-        onClickComentar()
+        onClickComment()
     }
 
-    const onClickComentar = () => {
-        const token = window.localStorage.getItem("token")
-
+    const onClickComment = () => {
         const body = {
-            text: form.comentario
+            text: form.comment
         }
 
-        axios.post(`${baseUrl}posts/${post.id}/comment`, body, {
-            headers: {
-                Authorization: token
-            }
+        axios
+        .post(`${url}/posts/${post.id}/comment`, body, {
+            headers
         })
-        .then((response) => {
+        .then(() => {
             alert("Você comentou com sucesso")
-            resetaEntrada()
+            resetInput()
             request()
         })
         .catch((error) => {
@@ -51,27 +47,11 @@ function CreateComment(props) {
     }
 
     return (
-        <div>
-            <ContainerPublicacao>
-                <h1>Criar Comentário</h1>
-            </ContainerPublicacao>
-            <ContainerPostagem>
-                <FormularioPostagem onSubmit={handleSave}>
-                    <div>
-                        <TextoPostagem 
-                            name="comentario" 
-                            type="text" 
-                            value={form.comentario}
-                            onChange={handleInputChange}
-                            placeholder="Não há limites de caracteres, para você não limitar o seu pensamento, 
-                            então digite aqui o seu comentário."
-                            required
-                        />
-                    </div>
-                    <BotaoCriaPost>Comentar</BotaoCriaPost>
-                </FormularioPostagem>
-            </ContainerPostagem>
-        </div>
+        <FormCreateComment 
+            handleInputChange= {handleInputChange}
+            handleSave= {handleSave}
+            form= {form}
+        />
     )
 }
 

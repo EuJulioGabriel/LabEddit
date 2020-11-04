@@ -4,44 +4,41 @@ import VoteComment from './VoteComment'
 
 import CommentsContext from '../../contexts/CommentsContext'
 
-import {ContainerCard, ContainerCards, ContainerInfo,ContainerPublicacao} from "../PageLogin/StylePageLogin"
+import { ContainerCard, ContainerCards, ContainerInfo, ContainerPublication } from "../PageLogin/StylePageLogin"
 
 function RenderComments() {
-
-    const comment = useContext(CommentsContext)
+    const comments = useContext(CommentsContext)
 
     return (
         <div>
             <div>
-                <ContainerPublicacao>
+                <ContainerPublication>
                     <h1>Comentários</h1>
-                </ContainerPublicacao>
+                </ContainerPublication>
             </div>
-            {comment.map((comentario)=>{
-     
+            {comments.map((comment) => {
                 return (
-                    <ContainerCards key={comentario.id}>
+                    <ContainerCards key={comment.id}>
                         <ContainerCard>
                             <ContainerInfo>
-                                <h2>{comentario.username}</h2>
+                                <h2>{comment.username}</h2>
                                 <div>
-                                    <p>{comentario.text}</p>
+                                    <p>{comment.text}</p>
                                 </div>
                             </ContainerInfo>
                                 <div>
                                     <VoteComment 
-                                        commentId={comentario.id}
-                                        commentVoteDirection={comentario.userVoteDirection}
-                                        commentVotesCount={comentario.votesCount}
+                                        commentId={comment.id}
+                                        commentVoteDirection={comment.userVoteDirection}
+                                        commentVotesCount={comment.votesCount}
                                     />
                                 </div>
                         </ContainerCard>
-
                     </ContainerCards>
                 )
             })}
         </div>
-        
     )
-}       
+}
+
 export default RenderComments

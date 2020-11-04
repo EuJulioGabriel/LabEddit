@@ -2,9 +2,9 @@ import React, { useEffect, useReducer } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import { baseUrl } from '../PageLogin/PageLogin'
+import { url, headers } from '../../constants/constants'
 import { initialState, PostReducer } from '../../reducers/PostReducer'
-import { ContainerAlturaMinimo, BotaoVoltar } from '../PageLogin/StylePageLogin'
+import { ContainerMinimumHeight, BackButton } from '../PageLogin/StylePageLogin'
 
 import RenderPost from './RenderPost'
 import RenderComments from './RenderComments'
@@ -16,7 +16,6 @@ import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
 import RequestVoteCommentContext from '../../contexts/RequestVoteCommentContext'
 
 function PagePost() {
-
     const history = useHistory()
     const pathParams = useParams()
     const [state, dispatch] = useReducer(PostReducer, initialState)
@@ -29,16 +28,12 @@ function PagePost() {
         } else {
             requestDetailPost()
         }
-
     }, [history])
 
     const requestDetailPost = () => {
-        const token = window.localStorage.getItem("token")
-
-        axios.get(`${baseUrl}posts/${pathParams.id}`, {
-            headers: {
-                Authorization: token
-            }
+        axios
+        .get(`${url}/posts/${pathParams.id}`, {
+            headers
         })
         .then((response) => {
             handleMoreDetailsPost(response.data.post)
@@ -49,14 +44,11 @@ function PagePost() {
     }
 
     const requestVoteComment = (body, postId, commentId ) => {
-        const token = window.localStorage.getItem("token")
-
-        axios.put(`${baseUrl}posts/${postId}/comment/${commentId}/vote`, body, {
-            headers: {
-                Authorization: token
-            }
+        axios
+        .put(`${url}/posts/${postId}/comment/${commentId}/vote`, body, {
+            headers
         })
-        .then((response) => {
+        .then(() => {
             requestDetailPost()
         })
         .catch((error) => {
@@ -66,7 +58,7 @@ function PagePost() {
 
     const handleMoreDetailsPost = (Post) => {
         const moreDetailsPost = {
-            type: "Renderizar",
+            type: "Render",
             post: Post
         }
 
@@ -78,7 +70,7 @@ function PagePost() {
     }
 
     return(
-        <ContainerAlturaMinimo>
+        <ContainerMinimumHeight>
             <PostDetailContext.Provider value={state.post}>
                 <RequestDetailPostContext.Provider value={requestDetailPost}>
                     <div>
@@ -89,13 +81,13 @@ function PagePost() {
                     </div>
                     <CommentsContext.Provider value={state.comment}>
                         <RequestVoteCommentContext.Provider value={requestVoteComment}>
-                            <RenderComments />
+                                <RenderComments />
                         </RequestVoteCommentContext.Provider>
                     </CommentsContext.Provider>
-                    <BotaoVoltar onClick={goToPageFeed}> Voltar </BotaoVoltar>
+                    <BackButton onClick={goToPageFeed}> Voltar </BackButton>
                 </RequestDetailPostContext.Provider>
             </PostDetailContext.Provider>
-        </ContainerAlturaMinimo>
+        </ContainerMinimumHeight>
     )
 }
 

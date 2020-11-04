@@ -2,18 +2,17 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-import useInput from '../../hooks/useInput'
-import {ContainerLogin, FormularioLogin, ContainerInput, BotaoLogin, InfoCadastro , 
-        ContainerGeralPageLogin, BotaoCadastrar, TextoLogin} from './StylePageLogin'
+import { url } from '../../constants/constants'
 
-export const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labEddit/"
+import useInput from '../../hooks/useInput'
+
+import FormPageLogin from './FormPageLogin'
 
 function PageLogin() {
-
     const history = useHistory()
-    const {form, onChange, resetaEntrada} = useInput({
+    const {form, onChange, resetInput} = useInput({
         email: "",
-        senha: ""
+        password: ""
     })
 
     useEffect(() => {
@@ -37,16 +36,16 @@ function PageLogin() {
     const onClickLogin = () => {
         const body = {
             email: form.email,
-            password: form.senha
+            password: form.password
         }
 
-        axios.post(`${baseUrl}login`, body)
+        axios
+        .post(`${url}/login`, body)
         .then((response) => {
             window.localStorage.setItem("token", response.data.token)
-            resetaEntrada()
+            resetInput()
             history.replace("/feed")
         })
-
         .catch((error) => {
             alert(error.message)
         })
@@ -57,40 +56,12 @@ function PageLogin() {
     }
     
     return (
-        <ContainerGeralPageLogin>
-            <ContainerLogin>
-                <FormularioLogin onSubmit={handleSave}>
-                    <ContainerInput>
-                        <TextoLogin>Email</TextoLogin>
-                        <input 
-                            name="email" 
-                            type="email" 
-                            value={form.email} 
-                            onChange={handleInputChange}
-                            required 
-                        />
-                    </ContainerInput>
-                    <ContainerInput>
-                        <TextoLogin>Senha</TextoLogin>
-                        <input 
-                            name="senha" 
-                            type="password" 
-                            value={form.senha} 
-                            onChange={handleInputChange}
-                            required 
-                        />
-                    </ContainerInput>
-                    <ContainerInput>
-                        <BotaoLogin>Login</BotaoLogin>
-                    </ContainerInput>
-                </FormularioLogin>
-            </ContainerLogin>
-            <InfoCadastro>
-                <h1>Ainda não é membro?</h1>
-                <h3>Você não sabe o que está perdendo, cadastre-se</h3>
-                <BotaoCadastrar onClick={goToSignUp}>Cadastrar-se</BotaoCadastrar>
-            </InfoCadastro>
-        </ContainerGeralPageLogin>
+        <FormPageLogin 
+            handleSave= {handleSave}
+            handleInputChange= {handleInputChange}
+            form= {form}
+            goToSignUp= {goToSignUp}
+        />
     )
 }
 

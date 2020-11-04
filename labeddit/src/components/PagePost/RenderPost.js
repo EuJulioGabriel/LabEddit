@@ -1,67 +1,31 @@
 import React, { useContext } from 'react'
 import axios from 'axios'
 
-import { baseUrl } from '../PageLogin/PageLogin'
+import { url, headers } from '../../constants/constants'
 
 import PostDetailContext from '../../contexts/PostDetailContext'
 import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
 
-import {Botao,ContainerCard,ContainerCards,ContainerInfo, ContainerBotaoVotos} from "../PageLogin/StylePageLogin"
+import { ContainerCard, ContainerCards, ContainerInfo } from "../PageLogin/StylePageLogin"
+
+import ButtonsVotePost from './ButtonsVotePost'
 
 function RenderPost() {
-
     const post = useContext(PostDetailContext)
     const requestDetailPostContext = useContext(RequestDetailPostContext)
 
     const requestVotePost = (body, idPost) => {
-        const token = window.localStorage.getItem("token")
-
-        axios.put(`${baseUrl}posts/${idPost}/vote`, body, {
-            headers:{
-                Authorization: token
-            }
+        axios
+        .put(`${url}/posts/${idPost}/vote`, body, {
+            headers
         })
-        .then((response) => {
+        .then(() => {
             requestDetailPostContext()
         })
-        .catch((err) => {
-            alert(err.message)
+        .catch((error) => {
+            alert(error.message)
         })
 
-    }
-
-    const onClickGostei = (Direcao) => {
-       
-        if (Direcao !== 1) {
-            const body = {
-                direction: 1
-            }
-            const idPost = post.id
-            requestVotePost(body, idPost)
-        } else {
-            onClickDeleteVote()
-        }
-        
-    }
-
-    const onClickNaoGostei = (Direcao) => {
-        if (Direcao !== -1) {
-            const body = {
-                direction: -1
-            }
-            const idPost = post.id
-            requestVotePost(body, idPost)
-        } else {
-            onClickDeleteVote()
-        }
-    }
-
-    const onClickDeleteVote = () => {
-        const body = {
-            direction: 0
-        }
-        const idPost = post.id
-        requestVotePost(body, idPost)
     }
 
     return (
@@ -75,21 +39,11 @@ function RenderPost() {
                     </div>
                     <p>Comentários: {post.commentsCount}</p>
                 </ContainerInfo>
-                    <ContainerBotaoVotos>
-                        <Botao 
-                        cor={post.userVoteDirection === 1 ? "green" : "white"}
-                        corTexto={post.userVoteDirection === 1 ? "white" : "black"}
-                        onClick={() => onClickGostei(post.userVoteDirection)}>↑
-                        </Botao>
-                        <p>{post.votesCount}</p>
-                        <Botao 
-                        cor={post.userVoteDirection === -1 ? "red" : "white"}
-                        corTexto={post.userVoteDirection === -1 ? "white" : "black"}
-                        onClick={() => onClickNaoGostei(post.userVoteDirection)}>↓
-                        </Botao>
-                    </ContainerBotaoVotos>
+                <ButtonsVotePost 
+                    post= {post}
+                    requestVotePost= {requestVotePost}
+                />
             </ContainerCard>
-
         </ContainerCards>
     )
 }
