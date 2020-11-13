@@ -5,12 +5,12 @@
 ## Stack
 Esse é um projeto de Frontend Web feito utilizando ReactJS, HTML e CSS; 
 e o npm como gerenciador de pacotes do NodeJS .
-Sobre a divisão dos arquivos, há quatros setores. Os `components` são 
+Sobre a divisão dos arquivos, há cinco setores. Os `components` são 
 os componentes em si do meu projeto (Header, Router, PageLogin, PageSignup, PageFeed, PagePost, Footer). 
 Já o segundo setor são os `contexts` que por sua vez são os contextos que são utilizados por diversos componentes sendo eles: CommentsContext,
 PostDetailContext, RequestDetailPostContext, RequestVoteCommentContext. O terceiro setor é o `hooks` que possue apenas um Custom Hook para contro
-lar os inputs do projeto. E o último setor mas não menos importante é o de `reducers` que é utilizado para guardar o valor da requisição que pega todos os 
-comentários de um post em específico sendo representado pelo PostReducers.
+lar os inputs do projeto. O quarto setor é o de `reducers` que é utilizado para guardar o valor da requisição que pega todos os 
+comentários de um post em específico sendo representado pelo PostReducers. O último setor é o de `constants` que é utilizado para guardar as constantes da aplicação.
 
 ## Sobre
 Esse foi um dos primeiros projetos que fiz em React.
@@ -31,7 +31,7 @@ Há integrações com uma API externas nesse caso.
 
 ## Deploy com Surge
 
-<a href="http://capable-talk.surge.sh/">LabEddit</a>
+<a href="http://labedditjulio.surge.sh/">LabEddit</a>
 
 ## Informações para login
 Email: visitante@visitante.com.br <br>
