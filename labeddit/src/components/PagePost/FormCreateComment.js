@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ContainerPublication, ContainerPost, FormPost, 
-         TextPost, CreatePostButton } from '../PageLogin/StylePageLogin'
+         TextPost, CreatePostButton, ContainerCreatePost } from '../PageLogin/StylePageLogin'
 
 function FormCreateComment(props) {
     return (
@@ -11,18 +11,18 @@ function FormCreateComment(props) {
             </ContainerPublication>
             <ContainerPost>
                 <FormPost onSubmit={props.handleSave}>
-                    <div>
+                    <ContainerCreatePost>
                         <TextPost 
                             name="comment" 
                             type="text" 
                             value={props.form.comment}
                             onChange={props.handleInputChange}
-                            placeholder="Não há limites de caracteres, para você não limitar o seu pensamento, 
-                            então digite aqui o seu comentário."
+                            placeholder="Não há limites de caracteres, para você não limitar o seu pensamento, então digite aqui o seu comentário."
                             required
                         />
-                    </div>
-                    <CreatePostButton>Comentar</CreatePostButton>
+                        <CreatePostButton>Comentar</CreatePostButton>
+                    </ContainerCreatePost>
+                    
                 </FormPost>
             </ContainerPost>
         </div>

@@ -3,10 +3,10 @@ import axios from 'axios'
 
 import useInput from '../../hooks/useInput'
 
-import { url, headers } from '../../constants/constants'
+import { url } from '../../constants/constants'
 
 import { TextPost, TitlePost, ContainerPost, FormPost, 
-         ContainerPublication, CreatePostButton } from "../PageLogin/StylePageLogin"
+         ContainerPublication, CreatePostButton, ContainerCreatePost } from "../PageLogin/StylePageLogin"
 
 function NewPost(props) {
     const { form, onChange, resetInput } = useInput({
@@ -26,6 +26,8 @@ function NewPost(props) {
     }
 
     const createPost = () => {
+        const token = window.localStorage.getItem("token")
+
         const body={
             "text": form.textPost,
 	        "title": form.titlePost
@@ -33,7 +35,9 @@ function NewPost(props) {
         
         axios
         .post(`${url}/posts`, body, {
-            headers
+            headers: {
+                Authorization: token
+            }
         })
         .then(() => {
             props.getPosts()
@@ -45,34 +49,34 @@ function NewPost(props) {
     }
 
     return (
-            <div>
+            <>
                 <ContainerPublication>
                     <h1>Criar publicação</h1>
                 </ContainerPublication>
                 <ContainerPost>
                     <FormPost onSubmit={handleSave}>
-                        <TitlePost 
-                            onChange={handleInputChange} 
-                            name={"titlePost"} 
-                            value={form.titlePost} 
-                            placeholder={"Escreva o titulo do seu Post"} 
-                            type={"text"} 
-                            required
-                        />
-                        <div>
+                        <ContainerCreatePost>
+                            <TitlePost 
+                                onChange={handleInputChange} 
+                                name={"titlePost"} 
+                                value={form.titlePost} 
+                                placeholder={"Digite aqui o titulo do seu Post"} 
+                                type={"text"} 
+                                required
+                            />
                             <TextPost 
                                 onChange={handleInputChange} 
                                 name={"textPost"} 
                                 value={form.textPost} 
-                                placeholder={"Escreva seu Post"} 
+                                placeholder={"Digite aqui seu Post."} 
                                 type={"text"} 
                                 required 
                             />
-                        </div>
-                        <CreatePostButton>Criar Post</CreatePostButton>
+                            <CreatePostButton>Criar Post</CreatePostButton>
+                        </ContainerCreatePost>
                     </FormPost>
                 </ContainerPost>
-            </div>
+            </>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import axios from 'axios'
 
-import { url, headers } from '../../constants/constants'
+import { url } from '../../constants/constants'
 
 import PostDetailContext from '../../contexts/PostDetailContext'
 import RequestDetailPostContext from '../../contexts/RequestDetailPostContext'
@@ -15,9 +15,13 @@ function RenderPost() {
     const requestDetailPostContext = useContext(RequestDetailPostContext)
 
     const requestVotePost = (body, idPost) => {
+        const token = window.localStorage.getItem("token")
+
         axios
         .put(`${url}/posts/${idPost}/vote`, body, {
-            headers
+            headers: {
+                Authorization: token
+            }
         })
         .then(() => {
             requestDetailPostContext()

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ContainerLogin, FormLogin, ContainerInput, LoginButton, InfoCadastro , 
-         ContainerGeneralPageLogin, SignupButton, TextLogin } from './StylePageLogin'
+         ContainerGeneralPageLogin, SignupButton, TextLogin, LoginInput } from './StylePageLogin'
 
 function FormPageLogin(props) {
     return (
@@ -10,9 +10,10 @@ function FormPageLogin(props) {
                 <FormLogin onSubmit={props.handleSave}>
                     <ContainerInput>
                         <TextLogin>Email</TextLogin>
-                        <input 
+                        <LoginInput 
                             name="email" 
-                            type="email" 
+                            type="email"
+                            placeholder="Digite aqui o seu email" 
                             value={props.form.email} 
                             onChange={props.handleInputChange}
                             required 
@@ -20,9 +21,10 @@ function FormPageLogin(props) {
                     </ContainerInput>
                     <ContainerInput>
                         <TextLogin>Senha</TextLogin>
-                        <input 
+                        <LoginInput
                             name="password" 
-                            type="password" 
+                            type="password"
+                            placeholder="Digite aqui a sua senha" 
                             value={props.form.password} 
                             onChange={props.handleInputChange}
                             required 

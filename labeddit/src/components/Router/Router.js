@@ -25,6 +25,11 @@ const Router = () => {
             <Route exact path="/post/:id">
               <PagePost />
             </Route>
+            <Route path="/">
+              <div>
+                <p>Página não existente</p>
+              </div>
+            </Route>
           </Switch>
           <Footer />
       </BrowserRouter>
