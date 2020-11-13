@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-import { url, headers } from '../../constants/constants'
+import { url } from '../../constants/constants'
 
 import NewPost from './NewPost'
 import CardPost from './CardPost'
@@ -32,9 +32,13 @@ function PageFeed() {
     }
     
     const getPosts = () => {
+        const token = window.localStorage.getItem("token")
+
         axios
-        .get(`${url}/posts`,{
-            headers
+        .get(`${url}/posts`, {
+            headers: {
+                Authorization: token
+            }
         })
         .then(response=>{
             setPost(response.data.posts)

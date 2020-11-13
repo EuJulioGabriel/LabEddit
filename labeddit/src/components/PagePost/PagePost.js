@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import { url, headers } from '../../constants/constants'
+import { url } from '../../constants/constants'
 import { initialState, PostReducer } from '../../reducers/PostReducer'
 import { ContainerMinimumHeight, BackButton } from '../PageLogin/StylePageLogin'
 
@@ -31,9 +31,13 @@ function PagePost() {
     }, [history])
 
     const requestDetailPost = () => {
+        const token = window.localStorage.getItem("token")
+
         axios
         .get(`${url}/posts/${pathParams.id}`, {
-            headers
+            headers: {
+                Authorization: token
+            }
         })
         .then((response) => {
             handleMoreDetailsPost(response.data.post)
@@ -44,9 +48,13 @@ function PagePost() {
     }
 
     const requestVoteComment = (body, postId, commentId ) => {
+        const token = window.localStorage.getItem("token")
+
         axios
         .put(`${url}/posts/${postId}/comment/${commentId}/vote`, body, {
-            headers
+            headers: {
+                Authorization: token
+            }
         })
         .then(() => {
             requestDetailPost()

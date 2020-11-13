@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import { url, headers } from '../../constants/constants'
+import { url } from '../../constants/constants'
 
 import { Button, ContainerVotesButton } from "../PageLogin/StylePageLogin"
 
@@ -36,9 +36,13 @@ function ButtonsVote(props) {
     }
     
     const vote = (post, body) => {
+        const token = window.localStorage.getItem("token")
+
         axios
         .put(`${url}/posts/${post.id}/vote`, body, {
-            headers
+            headers: {
+                Authorization: token
+            }
         })
         .then(() => {
             props.getPosts()

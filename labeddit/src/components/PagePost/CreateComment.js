@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import axios from 'axios'
 
 import useInput from '../../hooks/useInput'
-import { url, headers } from '../../constants/constants'
+import { url } from '../../constants/constants'
 
 import PostDetailContext from '../../contexts/PostDetailContext'
 import requestDetailPostContext from '../../contexts/RequestDetailPostContext'
@@ -28,13 +28,17 @@ function CreateComment() {
     }
 
     const onClickComment = () => {
+        const token = window.localStorage.getItem("token")
+
         const body = {
             text: form.comment
         }
 
         axios
         .post(`${url}/posts/${post.id}/comment`, body, {
-            headers
+            headers: {
+                Authorization: token
+            }
         })
         .then(() => {
             alert("Você comentou com sucesso")
